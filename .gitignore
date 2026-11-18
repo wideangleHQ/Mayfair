@@ -1,0 +1,31 @@
+# Repo root. The Next.js app lives in frontend/ and has its own .gitignore.
+
+# Dependencies and build output (anywhere in the repo)
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# Environment files (only .env.example is committed)
+.env*
+!.env.example
+
+# Vercel CLI link data
+.vercel/
+
+# Local Claude Code / editor settings
+.claude/settings.local.json
+.claude/launch.json
+graphify-out/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini

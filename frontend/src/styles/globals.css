@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+/* Tokens mirror the YAML front matter of docs/design.md — change them there first. */
+@theme {
+  --color-*: initial;
+  --color-forest: #193e30;
+  --color-forest-hover: #244d3c;
+  --color-botanical: #42634a;
+  --color-sage: #879782;
+  --color-gold: #b69b6c;
+  --color-ivory: #ffffff;
+  --color-paper: #ffffff;
+  --color-charcoal: #292b27;
+  --color-muted: #777970;
+  --color-border: #ddd9cf;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  /* Validation only — never brand gold/green for errors (design.md §3.3). */
+  --color-error: #a3352b;
+
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+  --text-display: clamp(2.625rem, 5.2vw, 5.5rem);
+  --text-display--line-height: 1.08;
+  --text-h1: clamp(2.25rem, 4vw, 4rem);
+  --text-h1--line-height: 1.12;
+  --text-h2: clamp(1.875rem, 3vw, 3rem);
+  --text-h2--line-height: 1.15;
+  --text-h3: clamp(1.5rem, 2vw, 2rem);
+  --text-h3--line-height: 1.2;
+  --text-h4: clamp(1.1875rem, 1.6vw, 1.5rem);
+  --text-h4--line-height: 1.25;
+  --text-lead: clamp(1.0625rem, 1.3vw, 1.25rem);
+  --text-lead--line-height: 1.65;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.1em;
+
+  --breakpoint-sm: 30rem;
+  --breakpoint-xl: 90rem;
+
+  --ease-calm: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@utility wrap {
+  width: min(100% - 40px, 1440px);
+  margin-inline: auto;
+  @media (width >= 48rem) {
+    width: min(100% - 48px, 1440px);
+  }
+}
+
+@utility eyebrow {
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  letter-spacing: var(--text-label--letter-spacing);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+  body {
+    background: #ffffff;
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+  h3 {
+    font-weight: 500;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-forest);
+    color: var(--color-white);
+  }
+}
+
+/* Buttons — design.md §8.2: forest, white, 48px min, sharp corners. */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 48px;
+  padding-inline: 1.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  transition:
+    background-color 220ms var(--ease-calm),
+    color 220ms var(--ease-calm),
+    border-color 220ms var(--ease-calm);
+}
+
+/* Text link with a quiet underline that grows on hover. */
+@utility link-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-height: 44px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  background: linear-gradient(currentColor, currentColor) 0 calc(100% - 10px) / 32px 1px no-repeat;
+  transition: background-size 280ms var(--ease-calm);
+  &:hover {
+    background-size: 100% 1px;
+  }
+}
+
+@keyframes hero-settle {
+  from {
+    transform: scale(1.08);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-media {
+    animation: hero-settle 2.8s var(--ease-calm) both;
+  }
+  .hero-copy > * {
+    animation: fade-up 700ms var(--ease-calm) both;
+  }
+  .hero-copy > :nth-child(2) {
+    animation-delay: 120ms;
+  }
+  .hero-copy > :nth-child(3) {
+    animation-delay: 240ms;
+  }
+  .hero-copy > :nth-child(4) {
+    animation-delay: 360ms;
+  }
+
+  /* Scroll-linked reveal: native, no JS, content is fully visible where unsupported. */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
