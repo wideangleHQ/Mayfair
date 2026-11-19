@@ -1,12 +1,12 @@
 ---
 colors:
-  accent: "#B69B6C"
   background: "#FFFFFF"
   border: "#DDD9CF"
   inverse: "#FFFFFF"
   primary: "#193E30"
   primary-hover: "#244D3C"
   sage: "#879782"
+  sage-light: "#B7C4B3"
   secondary: "#42634A"
   surface: "#FFFFFF"
   text: "#292B27"
@@ -175,9 +175,10 @@ not scatter raw colour values through components.
                                                    accents, subtle borders
                                                    or supporting graphics
 
-  `--color-antique-gold`   `#B69B6C`               Restrained premium
-                                                   accent, fine rules,
-                                                   small highlights
+  `--color-sage-light`     `#B7C4B3`               Small text, fine rules
+                                                   and highlights on
+                                                   forest green (about
+                                                   6.5:1 on forest)
 
   `--color-ivory`          `#F5F1E8`               Main warm page
                                                    background
@@ -209,7 +210,7 @@ not scatter raw colour values through components.
   `--color-text-muted`      `#777970`   Supporting text
   `--color-primary`         `#193E30`   Primary actions and brand elements
   `--color-primary-hover`   `#244D3C`   Primary hover state
-  `--color-accent`          `#B69B6C`   Restrained highlight
+  `--color-sage-light`      `#B7C4B3`   Small text and rules on forest green
   `--color-divider`         `#DDD9CF`   Borders and separators
   `--color-inverse`         `#FFFFFF`   Text on dark backgrounds
 
@@ -218,9 +219,11 @@ not scatter raw colour values through components.
 -   Use ivory and paper for most content backgrounds; use forest green
     as a deliberate anchor.
 -   Primary CTAs should use forest green with white text.
--   Antique gold is an accent, not a second primary brand colour. It
-    should occupy a small proportion of the interface.
--   Do not use gold for small text unless contrast has been checked.
+-   The palette is greens only: forest (dark), botanical, sage and
+    sage-light (light), on ivory and paper. There is no gold or other
+    warm accent colour.
+-   On forest green use sage-light for small text; sage (#879782) is
+    for large text and fine rules only.
 -   Use charcoal rather than pure black for most text.
 -   Do not place muted sage text on ivory at small sizes without
     checking contrast.
@@ -229,7 +232,7 @@ not scatter raw colour values through components.
 -   Do not introduce new colours without adding a named token and
     documenting its purpose.
 -   Use semantic status colours only when needed for validation or
-    booking states; do not repurpose brand gold or green for error
+    booking states; do not repurpose brand green for error
     states.
 
 ### 3.4 Contrast and accessibility
@@ -443,7 +446,7 @@ benefits from a circular hit area.
     needed (menus, drawers, floating booking panel).
 -   Avoid thick borders, heavy drop shadows, neumorphism, and
     glassmorphism.
--   Use fine antique-gold rules sparingly as editorial separators.
+-   Use fine sage rules sparingly as editorial separators.
 
 ------------------------------------------------------------------------
 
@@ -891,8 +894,8 @@ a generic luxury-hotel template.
 
 **Keep the heritage. Elevate the presentation. Simplify the journey.**
 
-The visual signature should be forest green, warm ivory, restrained
-antique gold, editorial serif headlines, clean sans-serif interface
+The visual signature should be forest green with lighter sage accents,
+warm ivory, editorial serif headlines, clean sans-serif interface
 typography, sharp architectural edges, generous spacing, authentic
 photography, and subtle cinematic motion.
 

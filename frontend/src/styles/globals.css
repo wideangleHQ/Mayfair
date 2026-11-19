@@ -7,7 +7,8 @@
   --color-forest-hover: #244d3c;
   --color-botanical: #42634a;
   --color-sage: #879782;
-  --color-gold: #b69b6c;
+  /* Lighter sage for small text and rules on forest green (7.7:1 on forest). */
+  --color-sage-light: #b7c4b3;
   --color-ivory: #ffffff;
   --color-paper: #ffffff;
   --color-charcoal: #292b27;
@@ -17,7 +18,7 @@
   --color-black: #000000;
   --color-transparent: transparent;
   --color-current: currentColor;
-  /* Validation only — never brand gold/green for errors (design.md §3.3). */
+  /* Validation only — never brand green for errors (design.md §3.3). */
   --color-error: #a3352b;
 
   --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
@@ -45,6 +46,9 @@
 
   --ease-calm: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
+
+/* Hover-capable pointer on tablet width and up: where hover-reveal interactions are allowed. */
+@custom-variant dhover (@media (hover: hover) and (min-width: 48rem));
 
 @utility wrap {
   width: min(100% - 40px, 1440px);
@@ -132,6 +136,164 @@
   transition: background-size 280ms var(--ease-calm);
   &:hover {
     background-size: 100% 1px;
+  }
+}
+
+/*
+ * Hero fluid scale. Every value equals the original desktop value at >= 1440px wide (and the
+ * original heading keeps growing to 5.5rem above that); below 1440px each element shrinks at its
+ * own rate toward a readable floor. Unlayered on purpose so it wins over the .btn / .eyebrow utilities.
+ */
+.hero {
+  min-height: clamp(32.5rem, 58vw, 37.5rem);
+}
+.hero-copy {
+  /* 176px at 1440x900; follows viewport height on short laptops and width on tall tablets. */
+  padding-bottom: clamp(4rem, min(19.5svh, 12.2vw), 11rem);
+}
+.hero-eyebrow {
+  font-size: clamp(0.6875rem, 0.833vw, 0.75rem);
+  margin-bottom: clamp(1rem, 1.667vw, 1.5rem);
+}
+.hero-title {
+  /* min(): the 5.2vw line is the original; the steeper line only takes over below 1440px. */
+  font-size: clamp(2.5rem, min(5.2vw, 6.95vw - 1.575rem, 11svh), 5.5rem);
+  line-height: 1.08;
+}
+.hero-lead {
+  font-size: clamp(1rem, min(1.3vw, 0.894vw + 0.366rem), 1.25rem);
+  margin-top: clamp(1rem, 1.667vw, 1.5rem);
+}
+.hero-cta-wrap {
+  margin-top: clamp(1.5rem, 2.778vw, 2.5rem);
+}
+.hero .hero-cta {
+  min-height: clamp(2.75rem, 3.333vw, 3rem);
+  padding-inline: clamp(1.25rem, 1.944vw, 1.75rem);
+  font-size: clamp(0.875rem, 1.042vw, 0.9375rem);
+  gap: clamp(0.5rem, 0.833vw, 0.75rem);
+}
+
+/* Final reveal: height of the image that sits beneath the footer (also the page's bottom margin). */
+:root {
+  --reveal-h: clamp(28rem, 85svh, 52rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Scroll-linked, only across the last --reveal-h of page scroll; static where unsupported. */
+  @supports (animation-timeline: scroll()) {
+    .reveal-img {
+      animation: reveal-image linear both;
+      animation-timeline: scroll(root block);
+      animation-range: calc(100% - var(--reveal-h)) 100%;
+    }
+    .reveal-copy {
+      animation: reveal-copy linear both;
+      animation-timeline: scroll(root block);
+      animation-range: calc(100% - var(--reveal-h) * 0.6) 100%;
+    }
+  }
+}
+@keyframes reveal-image {
+  from {
+    transform: translateY(-5%) scale(1.1);
+  }
+}
+@keyframes reveal-copy {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+}
+
+/* Preloader. Shown only while <html> has pl-lock (first visit) or pl-leaving (fade-out). */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-forest);
+}
+html.pl-lock,
+html.pl-lock body {
+  overflow: hidden;
+}
+html.pl-lock .preloader,
+html.pl-leaving .preloader {
+  display: flex;
+}
+.preloader[data-state="leaving"] {
+  opacity: 0;
+  transform: translateY(-1.5%);
+  pointer-events: none;
+  transition:
+    opacity 700ms var(--ease-calm),
+    transform 700ms var(--ease-calm);
+}
+/* Hold the hero's entrance until the preloader starts leaving, so it plays as the reveal. */
+html.pl-lock .hero-media,
+html.pl-lock .hero-copy > * {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pl-logo {
+    animation: pl-logo 800ms var(--ease-calm) 100ms both;
+  }
+  .pl-title {
+    animation: pl-rise 800ms var(--ease-calm) 400ms both;
+  }
+  .pl-rule {
+    animation: pl-rule 700ms var(--ease-calm) 750ms both;
+  }
+  .pl-sub {
+    animation: pl-fade 700ms var(--ease-calm) 1000ms both;
+  }
+}
+@keyframes pl-logo {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+@keyframes pl-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.875rem);
+  }
+}
+@keyframes pl-rule {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes pl-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Mega menu entrance: each item fades up with a short stagger (--i). Final state is the default, so nothing hides without motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .mm-item {
+    animation: mm-rise 420ms var(--ease-calm) both;
+    animation-delay: calc(var(--i, 0) * 55ms + 40ms);
+  }
+  .mm-img {
+    animation: mm-fade 520ms var(--ease-calm) both;
+    animation-delay: calc(var(--i, 0) * 55ms + 100ms);
+  }
+}
+@keyframes mm-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@keyframes mm-fade {
+  from {
+    opacity: 0;
   }
 }
 

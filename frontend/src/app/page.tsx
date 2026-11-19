@@ -1,6 +1,9 @@
 import BookingPanel from "@/components/BookingPanel";
+import FinalReveal from "@/components/FinalReveal";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import { Closing, Destinations, Discover, Experiences, Footer, GuestStories, Hero, Offers, Stays, Story } from "@/components/Sections";
+import PromotionalPopup from "@/components/PromotionalPopup";
+import { Closing, Destinations, Discover, Experiences, GuestStories, Hero, Offers, Stays, Story } from "@/components/Sections";
 
 export default function HomePage() {
   return (
@@ -9,19 +12,24 @@ export default function HomePage() {
         Skip to content
       </a>
       <Header />
-      <main id="main">
-        <Hero />
-        <BookingPanel />
-        <Story />
-        <Offers />
-        <Destinations />
-        <Stays />
-        <Experiences />
-        <Discover />
-        <GuestStories />
-        <Closing />
-      </main>
-      <Footer />
+      {/* Page content sits above the fixed final image; the bottom margin leaves room to uncover it. */}
+      <div className="relative z-10 mb-(--reveal-h) bg-ivory">
+        <main id="main">
+          <Hero />
+          <BookingPanel />
+          <Story />
+          <Offers />
+          <Destinations />
+          <Stays />
+          <Experiences />
+          <Discover />
+          <GuestStories />
+          <Closing />
+        </main>
+        <Footer />
+      </div>
+      <FinalReveal />
+      <PromotionalPopup />
     </>
   );
 }

@@ -6,9 +6,7 @@ import {
   closing,
   discover,
   experiences,
-  footer,
   hero,
-  logos,
   OFFICIAL_SITE,
   offers,
   propertyById,
@@ -43,7 +41,7 @@ function Head({ eyebrow, title, id, tone = "light", children }: { eyebrow: strin
     <div className="reveal grid gap-6 md:grid-cols-12 md:items-end md:gap-8">
       <div className="md:col-span-7">
         <p className={`eyebrow mb-5 flex items-center gap-4 ${tone === "dark" ? "text-white/80" : "text-botanical"}`}>
-          <span aria-hidden className="h-px w-10 bg-gold" />
+          <span aria-hidden className="h-px w-10 bg-sage" />
           {eyebrow}
         </p>
         <h2 id={id} className="text-h2">
@@ -63,7 +61,7 @@ const scroller = "-mx-5 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-
 
 export function Hero() {
   return (
-    <section id="top" aria-labelledby="hero-title" className="relative h-svh min-h-[600px] overflow-hidden bg-forest text-white">
+    <section id="top" aria-labelledby="hero-title" className="hero relative h-svh overflow-hidden bg-forest text-white">
       <Image
         src={hero.image.src}
         alt={hero.image.alt}
@@ -77,14 +75,14 @@ export function Hero() {
       />
       <div aria-hidden className="absolute inset-0 bg-linear-to-t from-black/65 via-black/20 to-black/0" />
       <div aria-hidden className="absolute inset-0 hidden bg-linear-to-r from-black/35 to-transparent to-60% lg:block" />
-      <div className="hero-copy wrap relative flex h-full flex-col justify-end pb-16 lg:pb-44">
-        <p className="eyebrow mb-6 text-white/85">{hero.eyebrow}</p>
-        <h1 id="hero-title" className="max-w-[13ch] text-display">
+      <div className="hero-copy wrap relative flex h-full flex-col justify-end">
+        <p className="eyebrow hero-eyebrow text-white/85">{hero.eyebrow}</p>
+        <h1 id="hero-title" className="hero-title max-w-[13ch]">
           {hero.title}
         </h1>
-        <p className="mt-6 max-w-[40ch] text-lead text-white/90">{hero.copy}</p>
-        <div className="mt-10">
-          <a href={hero.cta.href} className="btn border-white/80 text-white hover:bg-white hover:text-forest">
+        <p className="hero-lead max-w-[40ch] text-white/90">{hero.copy}</p>
+        <div className="hero-cta-wrap">
+          <a href={hero.cta.href} className="btn hero-cta border-white/80 text-white hover:bg-white hover:text-forest">
             {hero.cta.label} <Arrow />
           </a>
         </div>
@@ -163,7 +161,7 @@ export function Destinations() {
         <div className="reveal flex items-center justify-center gap-2 md:gap-3">
           <h2 id="dest-title" className="font-display text-[2rem] leading-none [writing-mode:vertical-rl] rotate-180 whitespace-nowrap md:text-[clamp(2.5rem,4.4vw,4rem)]">
             <span className="font-normal">{signature.title.lead} </span>
-            <span className="font-medium text-gold">{signature.title.strong}</span>
+            <span className="font-medium text-sage-light">{signature.title.strong}</span>
           </h2>
           <p className="eyebrow rotate-180 whitespace-nowrap text-ivory/75 [writing-mode:vertical-rl]">{signature.sub}</p>
         </div>
@@ -175,7 +173,7 @@ export function Destinations() {
                 <Media img={p.image} ratio="aspect-[4/5] md:aspect-[5/4]" sizes="(min-width: 1024px) 440px, (min-width: 768px) 42vw, 80vw" />
                 <span aria-hidden className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/65 to-transparent" />
                 <span className="absolute inset-x-0 bottom-0 flex items-stretch gap-3 p-5 md:p-6">
-                  <span aria-hidden className="w-px shrink-0 bg-gold" />
+                  <span aria-hidden className="w-px shrink-0 bg-sage-light" />
                   <span>
                     <span className="eyebrow block text-white/80">{p.place}</span>
                     <span className="mt-1.5 block font-display text-h4 text-white">{p.name}</span>
@@ -203,7 +201,7 @@ export function Stays() {
         <div className="reveal grid gap-5 md:grid-cols-12 md:items-end md:gap-8">
           <div className="md:col-span-7">
             <p className="eyebrow mb-4 flex items-center gap-4 text-botanical">
-              <span aria-hidden className="h-px w-10 bg-gold" />
+              <span aria-hidden className="h-px w-10 bg-sage" />
               {stays.eyebrow}
             </p>
             <h2 id="stays-title" className="max-w-[18ch] text-h2 text-forest">
@@ -220,17 +218,44 @@ export function Stays() {
 
         <ul className={`${scroller} mt-10 md:mt-12 md:grid md:grid-cols-3 md:items-start md:gap-6 md:overflow-visible lg:mt-14 lg:gap-8`}>
           {stays.items.map((item, i) => (
-            <li key={item.title} className={`group reveal w-[72%] shrink-0 snap-start sm:w-[46%] md:w-auto ${stayOffset[i] ?? ""}`}>
-              <div className="relative">
-                <a href={stays.link.href} tabIndex={-1} aria-hidden className="block">
-                  <Media img={item.image} ratio="aspect-[4/5]" sizes="(min-width: 1440px) 440px, (min-width: 1024px) 31vw, (min-width: 768px) 31vw, 72vw" />
-                </a>
-                <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-black/60 to-transparent" />
-                <h3 className="pointer-events-none absolute inset-x-0 bottom-0 p-5 text-h3 text-white">{item.title}</h3>
-              </div>
-              <p className="mt-4 max-w-[34ch] text-sm leading-[1.65] text-charcoal/85 md:text-base">{item.copy}</p>
-              <a href={stays.link.href} className="link-line eyebrow mt-1 text-forest" aria-label={`See more: ${item.title}`}>
-                See more <span aria-hidden className="ml-1 inline-block h-px w-10 bg-current align-middle" />
+            <li key={item.title} className={`reveal w-[72%] shrink-0 snap-start sm:w-[46%] md:w-auto ${stayOffset[i] ?? ""}`}>
+              {/* One link per card. Hover-capable screens (tablet+) reveal the description and CTA inside the
+                  photograph; touch screens and phones keep them visible below it, so nothing depends on hover. */}
+              <a href={stays.link.href} aria-label={`Discover ${item.title.toLowerCase()}: ${item.copy}`} className="group block focus-visible:outline-forest">
+                <div className="relative overflow-hidden bg-border">
+                  <div className="relative aspect-[4/5]">
+                    <Image
+                      src={item.image.src}
+                      alt={item.image.alt}
+                      fill
+                      sizes="(min-width: 1440px) 440px, (min-width: 768px) 31vw, 72vw"
+                      placeholder="blur"
+                      className="object-cover transition-transform duration-500 ease-calm group-hover:scale-[1.05] group-focus-visible:scale-[1.05]"
+                    />
+                  </div>
+                  <span aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-black/60 to-transparent" />
+                  <span aria-hidden className="pointer-events-none absolute inset-0 hidden bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-500 ease-calm group-hover:opacity-100 group-focus-visible:opacity-100 dhover:block" />
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <h3 className="text-h3 text-white">{item.title}</h3>
+                    {/* Desktop hover reveal: height grows from 0, so the title rises as the text appears. */}
+                    <div className="hidden grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-calm group-hover:grid-rows-[1fr] group-focus-visible:grid-rows-[1fr] dhover:grid">
+                      <div className="overflow-hidden">
+                        <p className="mt-2 max-w-[34ch] translate-y-3 text-sm leading-[1.6] text-white/90 opacity-0 transition-[opacity,translate] duration-500 ease-calm group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+                          {item.copy}
+                        </p>
+                        <span className="eyebrow mt-3 block translate-y-3 text-white opacity-0 transition-[opacity,translate] delay-75 duration-500 ease-calm group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+                          Discover {item.title.toLowerCase()} <Arrow />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="dhover:hidden">
+                  <p className="mt-4 max-w-[34ch] text-sm leading-[1.65] text-charcoal/85 md:text-base">{item.copy}</p>
+                  <span className="link-line eyebrow mt-1 text-forest">
+                    Discover {item.title.toLowerCase()} <Arrow />
+                  </span>
+                </div>
               </a>
             </li>
           ))}
@@ -242,37 +267,76 @@ export function Stays() {
 
 /* ---------- 07 experiences ---------- */
 
-const expLayout = [
-  { cell: "lg:col-span-7", ratio: "aspect-[4/3] lg:aspect-[16/10]", sizes: "(min-width: 1024px) 56vw, 100vw" },
-  { cell: "lg:col-span-4 lg:col-start-9 lg:mt-48", ratio: "aspect-[4/5]", sizes: "(min-width: 1024px) 32vw, 100vw" },
-  { cell: "lg:col-span-5 lg:col-start-2", ratio: "aspect-[4/5]", sizes: "(min-width: 1024px) 40vw, 100vw" },
-  { cell: "lg:col-span-5 lg:col-start-8 lg:mt-56", ratio: "aspect-[4/3]", sizes: "(min-width: 1024px) 40vw, 100vw" },
+// Masonry on a shared row unit (--u) so every horizontal and vertical gap is the same value.
+// lg: 3 columns x 7 rows -> tall | medium over short | tall. md: 2 columns x 7 rows, interlocked.
+// Below md: one column with alternating ratios. `pos` sets the focal point for each crop.
+const expTiles = [
+  { cell: "aspect-[4/5] sm:aspect-[4/3] md:aspect-auto md:col-start-1 md:row-start-1 md:row-span-4 lg:row-span-7", pos: "30% 50%", sizes: "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" },
+  { cell: "aspect-[5/4] sm:aspect-[16/10] md:aspect-auto md:col-start-2 md:row-start-1 md:row-span-3 lg:col-start-2 lg:row-span-4", pos: "60% 50%", sizes: "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" },
+  { cell: "aspect-[5/4] sm:aspect-[16/10] md:aspect-auto md:col-start-1 md:row-start-5 md:row-span-3 lg:col-start-2 lg:row-start-5 lg:row-span-3", pos: "50% 40%", sizes: "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" },
+  { cell: "aspect-[4/5] sm:aspect-[4/3] md:aspect-auto md:col-start-2 md:row-start-4 md:row-span-4 lg:col-start-3 lg:row-start-1 lg:row-span-7", pos: "50% 50%", sizes: "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" },
 ];
+
+// Description + CTA reveal: hidden until hover/focus on hover-capable desktops; always shown on
+// phones and touch devices, where hover does not exist.
+const reveal = {
+  rows: "grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-calm max-md:grid-rows-[1fr] [@media(hover:none)]:grid-rows-[1fr] group-hover:grid-rows-[1fr] group-focus-visible:grid-rows-[1fr]",
+  text: "translate-y-2 opacity-0 transition-[opacity,translate] duration-500 ease-calm max-md:translate-y-0 max-md:opacity-100 [@media(hover:none)]:translate-y-0 [@media(hover:none)]:opacity-100 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100",
+};
 
 export function Experiences() {
   return (
-    <section id="experiences" aria-labelledby="exp-title" className={`${section} scroll-mt-16 bg-forest text-white`}>
+    <section id="experiences" aria-labelledby="exp-title" className={`${section} scroll-mt-16 bg-ivory text-forest`}>
       <div className="wrap">
-        <Head eyebrow={experiences.eyebrow} title={experiences.title} id="exp-title" tone="dark">
-          <p className="text-white/85">Every stay is more than a room. These are the moments guests carry home.</p>
+        <Head eyebrow={experiences.eyebrow} title={experiences.title} id="exp-title">
+          <p className="text-charcoal/85">Every stay is more than a room. These are the moments guests carry home.</p>
         </Head>
-        <div className="mt-14 grid gap-y-16 md:mt-20 md:grid-cols-2 md:gap-x-8 lg:grid-cols-12 lg:gap-y-20">
-          {experiences.items.map((item, i) => (
-            <article
-              key={item.id}
-              id={item.id}
-              className={`group reveal scroll-mt-24 ${expLayout[i].cell} ${i % 2 ? "max-md:ml-auto max-md:w-[88%] md:mt-24" : "max-md:w-[88%]"}`}
-            >
-              <Media img={item.image} ratio={expLayout[i].ratio} sizes={expLayout[i].sizes} />
-              <p className="eyebrow mt-6 text-white/75">0{i + 1}</p>
-              <h3 className="mt-2 text-h3">{item.title}</h3>
-              <p className="mt-3 max-w-[44ch] text-white/85">{item.copy}</p>
-              <a href={OFFICIAL_SITE} className="link-line mt-2 text-white">
-                {item.link} <Arrow />
-              </a>
-            </article>
-          ))}
-        </div>
+        <ul className="mt-10 grid gap-4 md:mt-12 md:grid-cols-2 md:auto-rows-[var(--u)] md:[--u:min(11vw,5.25rem)] lg:grid-cols-3 lg:gap-5 lg:[--u:min(4.5vw,4rem)]">
+          {experiences.items.map((item, i) => {
+            const t = expTiles[i];
+            return (
+              <li key={item.id} id={item.id} className={`reveal min-h-0 scroll-mt-24 ${t.cell}`}>
+                <a
+                  href={OFFICIAL_SITE}
+                  aria-labelledby={`${item.id}-title`}
+                  aria-describedby={`${item.id}-copy`}
+                  className="group relative block h-full w-full overflow-hidden bg-border text-white focus-visible:outline-forest"
+                >
+                  <Image
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    fill
+                    sizes={t.sizes}
+                    placeholder="blur"
+                    className="object-cover transition-transform duration-[900ms] ease-calm group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
+                    style={{ objectPosition: t.pos }}
+                  />
+                  {/* Always-on base gradient for the title; full dark veil only on hover/focus. */}
+                  <span aria-hidden className="absolute inset-x-0 bottom-0 h-3/4 bg-linear-to-t from-black/75 via-black/25 to-transparent" />
+                  <span aria-hidden className="absolute inset-0 bg-black/45 opacity-0 transition-opacity duration-500 ease-calm group-hover:opacity-100 group-focus-visible:opacity-100" />
+                  <span className="absolute inset-x-0 bottom-0 block p-5 lg:p-6">
+                    <span aria-hidden className="mb-3 block h-px w-8 bg-sage-light" />
+                    <span id={`${item.id}-title`} className="block font-display text-[1.375rem] leading-[1.2] font-medium md:text-h3">
+                      {item.title}
+                    </span>
+                    <span className={reveal.rows}>
+                      <span className="block overflow-hidden">
+                        <span className={`block ${reveal.text}`}>
+                          <span id={`${item.id}-copy`} className="mt-2 block max-w-[40ch] text-[0.8125rem] leading-snug text-white/90 md:text-sm">
+                            {item.copy}
+                          </span>
+                          <span className="eyebrow mt-3 block text-sage-light">
+                            {item.link} <Arrow />
+                          </span>
+                        </span>
+                      </span>
+                    </span>
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
@@ -305,7 +369,7 @@ export function Offers() {
           <div className="md:col-span-6">
             <p className="eyebrow mb-4 text-botanical">{offers.eyebrow}</p>
             <h2 id="offers-title" className="flex items-center gap-6 text-h1 text-forest">
-              <span aria-hidden className="hidden h-px w-16 shrink-0 bg-gold sm:block" />
+              <span aria-hidden className="hidden h-px w-16 shrink-0 bg-sage sm:block" />
               {offers.title}
             </h2>
           </div>
@@ -324,7 +388,7 @@ export function Offers() {
 
         <p className="mt-10 text-sm text-charcoal/75">
           {offers.note}{" "}
-          <a href={offers.all.href} className="font-semibold text-forest underline decoration-gold underline-offset-4 hover:decoration-forest">
+          <a href={offers.all.href} className="font-semibold text-forest underline decoration-sage underline-offset-4 hover:decoration-forest">
             {offers.all.label}
           </a>
         </p>
@@ -407,59 +471,5 @@ export function Closing() {
         </div>
       </div>
     </section>
-  );
-}
-
-/* ---------- 12 footer ---------- */
-
-export function Footer() {
-  return (
-    <footer className="bg-forest pt-16 pb-[max(2rem,env(safe-area-inset-bottom))] text-white lg:pt-24">
-      <div className="wrap">
-        <div className="grid gap-12 border-b border-white/15 pb-14 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-4">
-            <Image src={logos.white} alt="MAYFAIR Hotels & Resorts" width={114} height={80} sizes="114px" />
-            <p className="mt-6 max-w-[32ch] text-white/80">Hotels and resorts shaped by Indian heritage, nature and heartfelt hospitality.</p>
-            <a href="#booking" className="btn mt-8 border-white/60 text-white hover:bg-white hover:text-forest">
-              Book your stay
-            </a>
-          </div>
-          <nav aria-label="Footer" className="grid grid-cols-2 gap-10 sm:grid-cols-4 lg:col-span-8 lg:gap-8">
-            {footer.groups.map((g) => (
-              <div key={g.title}>
-                <h2 className="eyebrow font-sans text-white/70">{g.title}</h2>
-                <ul className="mt-5 space-y-1">
-                  {g.links.map((l) => (
-                    <li key={l.label}>
-                      <a href={l.href} className="inline-flex min-h-11 items-center text-white/90 hover:text-white">
-                        {l.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-            <div>
-              <h2 className="eyebrow font-sans text-white/70">Connect</h2>
-              <ul className="mt-5 space-y-1">
-                {footer.social.map((s) => (
-                  <li key={s.label}>
-                    <a href={s.href} className="inline-flex min-h-11 items-center text-white/90 hover:text-white">
-                      {s.label}
-                    </a>
-                  </li>
-                ))}
-                <li>
-                  <a href={OFFICIAL_SITE} className="inline-flex min-h-11 items-center text-white/90 hover:text-white">
-                    mayfairhotels.com
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
-        <p className="pt-8 text-sm text-white/70">© MAYFAIR Hotels &amp; Resorts. All rights reserved.</p>
-      </div>
-    </footer>
   );
 }

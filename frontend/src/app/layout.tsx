@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import Preloader from "@/components/Preloader";
 import "@/styles/globals.css";
 
 // Display face per design.md §4. Interface text uses the system stack from the YAML tokens.
@@ -45,8 +46,19 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={playfair.variable}>
-      <body>{children}</body>
+    // suppressHydrationWarning: the inline script below adds a class to <html> before hydration.
+    <html lang="en" className={playfair.variable} suppressHydrationWarning>
+      <body>
+        {/* Runs before first paint on every full page load (including refresh): shows the preloader and locks scroll. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "var d=document.documentElement;d.classList.add('pl-lock');setTimeout(function(){d.classList.remove('pl-lock','pl-leaving')},6000)",
+          }}
+        />
+        <Preloader />
+        {children}
+      </body>
     </html>
   );
 }

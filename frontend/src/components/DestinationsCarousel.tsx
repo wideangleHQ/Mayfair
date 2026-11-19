@@ -57,7 +57,7 @@ export default function DestinationsCarousel({ children, label, count }: { child
           >
             <span
               className={`block rounded-full transition-all duration-300 ${
-                i === active ? "size-2.5 bg-gold" : "size-1.5 bg-ivory/45 group-hover/dot:bg-ivory/80"
+                i === active ? "size-2.5 bg-sage-light" : "size-1.5 bg-ivory/45 group-hover/dot:bg-ivory/80"
               }`}
             />
           </button>

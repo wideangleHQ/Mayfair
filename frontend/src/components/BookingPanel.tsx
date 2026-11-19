@@ -169,7 +169,7 @@ export default function BookingPanel() {
             </button>
           </form>
 
-          <p role="status" className={summary ? "mt-6 border-l-2 border-gold pl-4 text-sm text-charcoal" : "sr-only"}>
+          <p role="status" className={summary ? "mt-6 border-l-2 border-botanical pl-4 text-sm text-charcoal" : "sr-only"}>
             {summary}
           </p>
         </div>

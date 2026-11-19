@@ -10,6 +10,8 @@ import jharsuguda from "@/assets/Images/imgi_7_mayfair-jharsuguda-aerial-view.we
 import gangtok from "@/assets/Images/imgi_8_mayfair-gangtok-aerial-view.png";
 import siliguriAerial from "@/assets/Images/imgi_9_mayfair-siliguri-aerial-view.png";
 import lagoon from "@/assets/Images/imgi_10_Scroll_4_Lagoon_Bhubaneswar_ws2flc.png";
+import convention from "@/assets/Images/imgi_11_Conv_Corr_02_(2)_Edit.png";
+import lawn from "@/assets/Images/imgi_19_RSC_9690_a3jnto.webp";
 import paradeep from "@/assets/Images/imgi_12_mayfair-paradeep-resort.webp";
 import brandAerial from "@/assets/Images/imgi_13_Aboutthebrand_w6tiaa.png";
 import heritageRoom from "@/assets/Images/imgi_14_Heritage_113-1_x2kwuc.png";
@@ -18,6 +20,7 @@ import dining from "@/assets/Images/imgi_17_UniqueDining_lzpebh.webp";
 import wedding from "@/assets/Images/imgi_18_107__Shaadi_closeup_2_pur1a3.webp";
 import wellness from "@/assets/Images/imgi_21_wellness_Rejuve_ngmvoz.png";
 import darjeeling from "@/assets/Images/imgi_22_Darjeeling_078_h5cllj.png";
+import seaDeck from "@/assets/Images/imgi_24_WhatsApp_Image_2022-09-22_at_2.58.png";
 import rourkela from "@/assets/Images/imgi_37_Mayfair_Garden_Rourkela.webp";
 import clubRoom from "@/assets/Images/imgi_41_Club_Room_colfoo.webp";
 import deluxeSuite from "@/assets/Images/imgi_44_Deluxe_Suite_fe1176f6.png";
@@ -122,20 +125,6 @@ export const properties: Property[] = [
 ];
 
 export const propertyById = (id: string) => properties.find((p) => p.id === id);
-
-/** Mega-menu grouping by geography. */
-export const hotelGroups: { title: string; ids: string[] }[] = [
-  { title: "Himalaya & tea country", ids: ["kalimpong", "gangtok", "darjeeling", "siliguri"] },
-  { title: "Odisha & the coast", ids: ["lagoon", "gopalpur", "paradeep", "jharsuguda", "rourkela"] },
-  { title: "Central India", ids: ["raipur"] },
-];
-
-export const nav = [
-  { label: "Experiences", href: "#experiences" },
-  { label: "Weddings & celebrations", href: "#exp-weddings" },
-  { label: "Offers", href: "#offers" },
-  { label: "Our story", href: "#story" },
-];
 
 export const hero = {
   image: { src: heroJungpana, alt: "MAYFAIR Jungpana on a ridge above tea gardens, the hills fading into a sunset sky", position: "60% 55%" },
@@ -271,12 +260,183 @@ export const closing = {
   image: { src: jharsuguda, alt: "MAYFAIR resort at sunset, lit guest wings around a central lawn" },
 };
 
+/*
+ * Footer data. Destinations, link targets and social URLs were read from the live footer at
+ * mayfairhotels.com. That site shows no sitemap, legal pages, booking-engine URL, map link or
+ * copyright line, so none are rendered here; add them to this object when verified.
+ */
+const site = (path: string) => `${OFFICIAL_SITE}/${path}`;
+
 export const footer = {
-  groups: [
-    { title: "Discover", links: [{ label: "Our hotels", href: "#destinations" }, { label: "Our story", href: "#story" }, { label: "Offers", href: "#offers" }] },
-    { title: "Experiences", links: [{ label: "Dining", href: "#exp-dining" }, { label: "Wellness", href: "#exp-wellness" }, { label: "Weddings", href: "#exp-weddings" }, { label: "Meetings & events", href: OFFICIAL_SITE }] },
-    { title: "Reservations", links: [{ label: "Book your stay", href: "#booking" }, { label: "Contact", href: OFFICIAL_SITE }, { label: "Reservation assistance", href: OFFICIAL_SITE }] },
+  statement: { lead: "Hospitality that", accent: "stays with you." },
+  destinations: {
+    title: "Explore our destinations",
+    items: [
+      { label: "Alibag", href: site("manor-alibag") },
+      { label: "Bhubaneswar", href: site("lagoon-bhubaneswar") },
+      { label: "Darjeeling", href: site("hill-resort-darjeeling") },
+      { label: "Gangtok", href: site("spa-resort-casino-gangtok") },
+      { label: "Goa", href: site("on-sea-morjim-goa") },
+      { label: "Gopalpur", href: site("palm-beach-resort-gopalpur-on-sea") },
+      { label: "Guwahati", href: site("mayfair-spring-valley-resort-guwahati") },
+      { label: "Jharsuguda", href: site("oasis-resort-convention-jharsuguda") },
+      { label: "Jungpana", href: site("mayfair-manor-jungpana") },
+      { label: "Kalimpong", href: site("himalayan-spa-resort-kalimpong") },
+      { label: "Paradeep", href: site("bay-resort-paradeep") },
+      { label: "Puri", href: site("heritage-puri") },
+      { label: "Purnea", href: site("purnea") },
+      { label: "Raipur", href: site("lake-resort-raipur") },
+      { label: "Rourkela", href: site("rourkela") },
+      { label: "Siliguri", href: site("tea-resort-siliguri") },
+      { label: "Upcoming Properties", href: site("upcoming-properties.html") },
+    ],
+  },
+  discover: {
+    title: "Discover MAYFAIR",
+    groups: [
+      { title: "Stays", links: [{ label: "Home", href: `${OFFICIAL_SITE}/` }, { label: "Resorts", href: site("resorts.html") }, { label: "Upcoming Properties", href: site("upcoming-properties.html") }] },
+      { title: "Experiences", links: [{ label: "Dining", href: site("dining.html") }, { label: "Wellness", href: site("wellness.html") }, { label: "Weddings", href: site("weddings.html") }, { label: "Events", href: site("events.html") }] },
+      { title: "Discover", links: [{ label: "Offers", href: site("offers.html") }, { label: "Awards", href: site("awards.html") }, { label: "Growth Story", href: site("growth-story.html") }, { label: "About Us", href: site("about-us.html") }] },
+      { title: "Information", links: [{ label: "Partner Program", href: site("partner-program.html") }, { label: "Press", href: site("press.html") }, { label: "Blogs", href: site("blogs.html") }, { label: "Careers", href: site("careers.html") }, { label: "Corporate Information", href: site("corporate-information.html") }, { label: "Contact Us", href: site("contact-us.html") }] },
+    ],
+  },
+  contact: {
+    title: "We would love to welcome you",
+    company: "MAYFAIR HOTELS AND RESORTS LIMITED",
+    address: ["8-B, Jaydev Vihar,", "Bhubaneswar - 751013"],
+    reservations: { label: "Central Reservation Number", text: "+91 92 3750 0101", href: "tel:+919237500101" },
+    tollFree: { label: "Toll-Free Number", text: "1800 296 0101", href: "tel:18002960101" },
+    email: { label: "Email", text: "reservations@mayfairhotels.com", href: "mailto:reservations@mayfairhotels.com" },
+    website: { label: "Website", text: "www.mayfairhotels.com", href: OFFICIAL_SITE },
+  },
+  social: [
+    { id: "instagram", label: "MAYFAIR on Instagram", href: "https://www.instagram.com/mayfairhotelsandresorts/" },
+    { id: "facebook", label: "MAYFAIR on Facebook", href: "https://www.facebook.com/MayfairHotelsIndia/" },
+    { id: "youtube", label: "MAYFAIR on YouTube", href: "https://www.youtube.com/@MayfairResorts" },
+    { id: "x", label: "MAYFAIR on X", href: "https://twitter.com/mayfairresorts?lang=en" },
   ],
-  // Social handles and phone/email were not supplied; add verified ones here to render them.
-  social: [] as { label: string; href: string }[],
+  copyright: "© MAYFAIR Hotels & Resorts. All rights reserved.",
+};
+
+/** Final scroll-reveal image beneath the footer. CTA targets the on-page booking panel (no external engine exists). */
+export const finalReveal = {
+  image: { src: lagoon, alt: "Aerial view of MAYFAIR Lagoon: red-tiled cottages, palms and fountains set around a still green lagoon", position: "50% 45%" },
+  eyebrow: "Your MAYFAIR journey begins here",
+  title: "An extraordinary stay awaits.",
+  copy: "Discover exceptional destinations, thoughtful hospitality and experiences worth remembering.",
+  cta: { label: "Book your stay", href: "#booking" },
+};
+
+export const promotionalPopup = {
+  enabled: true,
+  image: {
+    src: seaDeck,
+    alt: "Canopied terrace deck at dusk overlooking the sea at MAYFAIR Palm Beach Resort",
+    watermark: "MAYFAIR",
+  },
+  eyebrow: "EXCLUSIVE INVITATION",
+  heading: "AN INVITATION TO EXPERIENCE MAYFAIR",
+  copy: "Discover thoughtfully curated stays, exceptional destinations and special privileges, created to make your next MAYFAIR experience truly memorable.",
+  cta: {
+    label: "EXPLORE THE OFFER",
+    href: "#offers",
+  },
+};
+
+/*
+ * Header navigation. Every link is a page that exists on the live mayfairhotels.com (read from its
+ * footer). "Leisure & Relaxation" and "Art & Heritage" have no page of their own there, so they point
+ * at the Resorts and About Us pages instead of an invented route. No "Our Philosophy" page was found.
+ */
+export type MenuImage = { src: StaticImageData; alt: string; position?: string };
+export type MenuCard = { title: string; copy: string; cta: string; href: string; image: MenuImage };
+
+export const mainNav = [
+  { id: "destinations", label: "Destinations" },
+  { id: "experiences", label: "Experiences" },
+  { id: "celebrations", label: "Celebrations" },
+  { id: "offers", label: "Offers" },
+  { id: "story", label: "Our Story" },
+] as const;
+export type MenuId = (typeof mainNav)[number]["id"];
+
+const dest = (label: string, path: string) => ({ label, href: site(path) });
+
+export const megaMenus = {
+  destinations: {
+    heading: "Discover a world of MAYFAIR.",
+    copy: "Explore distinctive destinations, each with its own character, culture and sense of place.",
+    cta: { label: "Explore all destinations", href: site("resorts.html") },
+    groups: [
+      {
+        title: "East India",
+        links: [
+          dest("Bhubaneswar", "lagoon-bhubaneswar"),
+          dest("Puri", "heritage-puri"),
+          dest("Gopalpur", "palm-beach-resort-gopalpur-on-sea"),
+          dest("Darjeeling", "hill-resort-darjeeling"),
+          dest("Kalimpong", "himalayan-spa-resort-kalimpong"),
+          dest("Siliguri", "tea-resort-siliguri"),
+          dest("Gangtok", "spa-resort-casino-gangtok"),
+          dest("Jungpana", "mayfair-manor-jungpana"),
+        ],
+      },
+      {
+        title: "Other destinations",
+        links: [
+          dest("Goa", "on-sea-morjim-goa"),
+          dest("Alibag", "manor-alibag"),
+          dest("Guwahati", "mayfair-spring-valley-resort-guwahati"),
+          dest("Jharsuguda", "oasis-resort-convention-jharsuguda"),
+          dest("Paradeep", "bay-resort-paradeep"),
+          dest("Raipur", "lake-resort-raipur"),
+          dest("Rourkela", "rourkela"),
+          dest("Purnea", "purnea"),
+          dest("Upcoming Properties", "upcoming-properties.html"),
+        ],
+      },
+    ],
+    featured: {
+      name: "MAYFAIR Lagoon",
+      place: "Bhubaneswar, Odisha",
+      cta: "Discover property",
+      href: site("lagoon-bhubaneswar"),
+      image: { src: lagoon, alt: "Aerial view of MAYFAIR Lagoon: red-tiled cottages, palms and fountains around a green lagoon", position: "50% 45%" },
+    },
+  },
+  experiences: {
+    heading: "Experiences worth remembering.",
+    copy: "Discover the many ways to experience the MAYFAIR way of life.",
+    items: [
+      { title: "Dining", copy: "Exceptional culinary journeys.", cta: "Discover more", href: site("dining.html"), image: { src: dining, alt: "High tea served on a balcony above the lagoon" } },
+      { title: "Wellness", copy: "A world of rejuvenation.", cta: "Discover more", href: site("wellness.html"), image: { src: wellness, alt: "Spa treatment room opening onto forest views", position: "60% 50%" } },
+      { title: "Leisure & Relaxation", copy: "Time to unwind.", cta: "Discover more", href: site("resorts.html"), image: { src: lawn, alt: "Sunlit resort lawn with parasols and garden tables", position: "50% 60%" } },
+      { title: "Art & Heritage", copy: "Stories within every space.", cta: "Discover more", href: site("about-us.html"), image: { src: artCulture, alt: "Tanjore paintings above brass sculptures and lit diyas" } },
+    ] satisfies MenuCard[],
+  },
+  celebrations: {
+    heading: "Moments that deserve extraordinary settings.",
+    copy: "Beautiful settings, thoughtful hospitality and celebrations worth remembering.",
+    items: [
+      { title: "Weddings", copy: "Celebrate your story.", cta: "Explore weddings", href: site("weddings.html"), image: { src: wedding, alt: "Bride and groom arriving in a flower-decorated carriage" } },
+      { title: "Meetings & Conferences", copy: "Gather with distinction.", cta: "Explore meetings", href: site("events.html"), image: { src: convention, alt: "Yellow neoclassical convention building with a columned entrance" } },
+      { title: "Social Celebrations", copy: "Make every occasion memorable.", cta: "Discover more", href: site("events.html"), image: { src: kanchenjunga, alt: "Event lawn with fire pits and parasols facing the Himalaya" } },
+    ] satisfies MenuCard[],
+  },
+  offers: {
+    heading: "Something special awaits.",
+    copy: "Discover thoughtfully curated offers for your next MAYFAIR escape.",
+    all: { label: "View all offers", href: site("offers.html") },
+  },
+  story: {
+    heading: "More than a destination. A legacy of heartfelt hospitality.",
+    copy: "Discover the philosophy, heritage and people behind the MAYFAIR experience.",
+    links: [
+      { label: "Our Story", href: site("about-us.html") },
+      { label: "Heritage & Growth", href: site("growth-story.html") },
+      { label: "Awards & Recognition", href: site("awards.html") },
+      { label: "Corporate Information", href: site("corporate-information.html") },
+    ],
+    image: { src: kalimpong, alt: "Rose-pink heritage façade of MAYFAIR Himalayan Spa Resort, Kalimpong, at dusk", position: "40% 50%" },
+  },
 };
